@@ -1,10 +1,12 @@
 import express from 'express'
+import morgan from 'morgan'
 import 'dotenv/config'
 
 const app = express()
 
 app.use(express.urlencoded({ extended: false }))
 app.use(express.json())
+app.use(morgan('dev'))
 
 app.get('/', function (req, res) {
     res.send('hello, world!')
