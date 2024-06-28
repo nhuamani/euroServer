@@ -77,9 +77,27 @@ const updateTeamById = (req, res) => {
     })
 }
 
+const deleteTeamById = (req, res) => {
+    console.log(res)
+    teams.deleteById(req.params.id, (err, data) => {
+        if (err) {
+            if (err.kind === 'not_found') {
+                res.status(404).send({
+                    message: `Not found Team with id ${req.params.id}.`,
+                })
+            } else {
+                res.status(500).send({
+                    message: 'Could not delete Team with id ' + req.params.id,
+                })
+            }
+        } else res.send({ message: `${req.params.id} Team was deleted successfully!` })
+    })
+}
+
 export default {
     getAllTeams,
     getTeamById,
     createTeam,
     updateTeamById,
+    deleteTeamById,
 }

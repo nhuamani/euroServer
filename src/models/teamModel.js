@@ -69,9 +69,29 @@ const updateById = (id, team, result) => {
     })
 }
 
+const deleteById = (id, result) => {
+    db.query('DELETE FROM teams WHERE id = ?', id, (err, res) => {
+        if (err) {
+            console.log('error: ', err)
+            result(null, err)
+            return
+        }
+
+        if (res.affectedRows == 0) {
+            // not found Teams with the id
+            result({ kind: 'not_found' }, null)
+            return
+        }
+
+        console.log('deleted teams with id: ', id)
+        result(null, res)
+    })
+}
+
 export default {
     getAll,
     findById,
     create,
     updateById,
+    deleteById,
 }
