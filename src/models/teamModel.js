@@ -36,7 +36,22 @@ const findById = (id, result) => {
     })
 }
 
+const create = (newTeam, result) => {
+    // TODO: VALIDATE THAT TEAMS WITH THE SAME NAME ARE NOT CREATED
+    db.query('INSERT INTO teams SET ?', newTeam, (err, res) => {
+        if (err) {
+            console.log('error: ', err)
+            result(err, null)
+            return
+        }
+
+        console.log('created teams: ', { id: res.insertId, ...newTeam })
+        result(null, { id: res.insertId, ...newTeam })
+    })
+}
+
 export default {
     getAll,
     findById,
+    create,
 }
