@@ -5,5 +5,6 @@ import teamsController from '../controllers/teamController.js'
 router.get('/', teamsController.getAllTeams)
 router.get('/:id', teamsController.getTeamById)
 router.post('/', teamsController.createTeam)
+router.put('/:id', teamsController.updateTeamById)
 
 export default router

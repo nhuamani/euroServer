@@ -50,8 +50,28 @@ const create = (newTeam, result) => {
     })
 }
 
+const updateById = (id, team, result) => {
+    db.query('UPDATE teams SET name = ?, country = ?, status = ? WHERE id = ?', [team.name, team.country, team.status, id], (err, res) => {
+        if (err) {
+            console.log('error: ', err)
+            result(null, err)
+            return
+        }
+
+        if (res.affectedRows == 0) {
+            // not found Teams with the id
+            result({ kind: 'not_found' }, null)
+            return
+        }
+
+        console.log('updated teams: ', { id: id, ...team })
+        result(null, { id: id, ...team })
+    })
+}
+
 export default {
     getAll,
     findById,
     create,
+    updateById,
 }
