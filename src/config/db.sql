@@ -1,5 +1,5 @@
 DROP DATABASE euro;
-CREATE DATABASE euro;
+CREATE DATABASE eurocup;
 use euro;
 
 DROP TABLE teams;

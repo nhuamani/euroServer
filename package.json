@@ -12,12 +12,12 @@
   "license": "MIT",
   "description": "The UEFA European Football Championship",
   "dependencies": {
-    "dotenv": "^16.4.5",
-    "express": "^4.19.2",
-    "mysql2": "^3.10.1"
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "mysql2": "^3.12.0"
   },
   "devDependencies": {
     "morgan": "^1.10.0",
-    "nodemon": "^3.1.4"
+    "nodemon": "^3.1.9"
   }
 }
