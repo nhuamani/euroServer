@@ -1,6 +1,7 @@
 import express from 'express'
-const router = express.Router()
 import teamsController from '../controllers/teamController.js'
+
+const router = express.Router()
 
 router.get('/', teamsController.getAllTeams)
 router.get('/:id', teamsController.getTeamById)

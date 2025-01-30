@@ -1,7 +1,8 @@
 import db from '../config/database.js'
 
 const getAll = (result) => {
-    let query = 'SELECT * FROM teams'
+    let query =
+        'SELECT t.id, t.name, t.status, t.created_at, t.updated_at, c.name as country FROM teams t INNER JOIN countries c ON t.country_id = c.id'
 
     db.query(query, (err, res) => {
         if (err) {

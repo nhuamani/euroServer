@@ -2,22 +2,168 @@ DROP DATABASE euro;
 CREATE DATABASE eurocup;
 use euro;
 
-DROP TABLE teams;
-
-CREATE TABLE teams (
+CREATE TABLE countries (
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(50),
-    country VARCHAR(50),
+    acronym VARCHAR(5),
     status BOOLEAN DEFAULT true,
     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
-INSERT INTO teams (name, country, status) VALUES
-('Ukraine','Ukraine', true),
-('Germany','Germany', false),
-('Spain','Spain', true),
-('Netherlands','Netherlands', false),
-('Russian','Russian', true);
+INSERT INTO countries (name, acronym, status) VALUES
+('Ukraine','UKR', true),
+('Germany','GER', false),
+('Spain','ESP', true),
+('Netherlands','NED', false),
+('Russian','RUS', true),
+('Italy','ITA', true),
+('France','FRA', true),
+('Portugal','POR', true),
+('England','ENG', true),
+('Belgium','BEL', true),
+('Croatia','CRO', true),
+('Switzerland','SUI', true),
+('Denmark','DEN', true),
+('Sweden','SWE', true),
+('Austria','AUT', true),
+('Poland','POL', true),
+('Turkey','TUR', true),
+('Czech Republic','CZE', true),
+('Wales','WAL', true),
+('Scotland','SCO', true),
+('Slovakia','SVK', true),
+('Hungary','HUN', true),
+('Finland','FIN', true),
+('North Macedonia','MKD', true),
+('Slovenia','SVN', true),
+('Serbia','SRB', true),
+('Iceland','ISL', true),
+('Bosnia and Herzegovina','BIH', true),
+('Greece','GRE', true),
+('Albania','ALB', true),
+('Montenegro','MNE', true),
+('Estonia','EST', true),
+('Latvia','LVA', true),
+('Lithuania','LTU', true),
+('Luxembourg','LUX', true),
+('Cyprus','CYP', true),
+('Malta','MLT', true),
+('Andorra','AND', true),
+('San Marino','SMR', true),
+('Liechtenstein','LIE', true),
+('Armenia','ARM', true),
+('Azerbaijan','AZE', true),
+('Belarus','BLR', true),
+('Georgia','GEO', true),
+('Kazakhstan','KAZ', true),
+('Moldova','MDA', true),
+('Uzbekistan','UZB', true),
+('Turkmenistan','TKM', true),
+('Kyrgyzstan','KGZ', true),
+('Tajikistan','TJK', true),
+('Afghanistan','AFG', true),
+('Iran','IRN', true),
+('Iraq','IRQ', true),
+('Syria','SYR', true),
+('Lebanon','LBN', true),
+('Jordan','JOR', true);
+
+
+DROP TABLE IF EXISTS teams;
+
+CREATE TABLE teams (
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(50),
+    status BOOLEAN DEFAULT true,
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    country_id INT,
+    FOREIGN KEY (country_id) REFERENCES countries(id)
+);
 
 DELETE FROM teams;
+
+INSERT INTO teams (name, status, country_id) VALUES
+('Ukraine', true, 1),
+('Germany', false, 2),
+('Spain', true, 3),
+('Netherlands', false, 4),
+('Russian', true, 5),
+('Italy', true, 6),
+('France', true, 7),
+('Portugal', true, 8),
+('England', true, 9),
+('Belgium', true, 10),
+('Croatia', true, 11),
+('Switzerland', true, 12),
+('Denmark', true, 13),
+('Sweden', true, 14),
+('Austria', true, 15),
+('Poland', true, 16),
+('Turkey', true, 17),
+('Czech Republic', true, 18),
+('Wales', true, 19),
+('Scotland', true, 20),
+('Slovakia', true, 21),
+('Hungary', true, 22),
+('Finland', true, 23),
+('North Macedonia', true, 24),
+('Slovenia', true, 25),
+('Serbia', true, 26),
+('Iceland', true, 27),
+('Bosnia and Herzegovina', true, 28),
+('Greece', true, 29),
+('Albania', true, 30),
+('Montenegro', true, 31),
+('Estonia', true, 32),
+('Latvia', true, 33),
+('Lithuania', true, 34),
+('Luxembourg', true, 35),
+('Cyprus', true, 36),
+('Malta', true, 37),
+('Andorra', true, 38),
+('San Marino', true, 39),
+('Liechtenstein', true, 40),
+('Armenia', true, 41),
+('Azerbaijan', true, 42),
+('Belarus', true, 43),
+('Georgia', true, 44),
+('Kazakhstan', true, 45),
+('Moldova', true, 46),
+('Uzbekistan', true, 47),
+('Turkmenistan', true, 48),
+('Kyrgyzstan', true, 49),
+('Tajikistan', true, 50),
+('Afghanistan', true, 51),
+('Iran', true, 52),
+('Iraq', true, 53),
+('Syria', true, 54),
+('Lebanon', true, 55),
+('Jordan', true, 56);
+
+
+CREATE TABLE players (
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(35),
+    position VARCHAR(20),
+    shirt_number VARCHAR(2),
+    date_of_birth DATE,
+    height INT(3),
+    weight DECIMAL(2,2),
+    status BOOLEAN DEFAULT true,
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    team_id INT,
+    country_id INT,
+    FOREIGN KEY (team_id) REFERENCES teams(id),
+    FOREIGN KEY (country_id) REFERENCES countries(id)
+);
+
+
+INSERT INTO players (name, position, shirt_number, date_of_birth, status, team_id, country_id) VALUES
+('Jamal Musiala','Midfielder','10','2023-02-26', true, 2, 2),
+('Tony Kroos','Midfielder','8','1990-01-04', true, 2, 2),
+('Cristiano Ronaldo','Forward','7','1985-02-05', true, 8, 8),
+('Arda Güler','Forward','8','2005-02-25', true, 17, 17),
+('Kylian Mbappé','Forward','10','1998-12-20', true, 7, 7);
